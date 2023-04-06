@@ -1,83 +1,83 @@
 SELECT
-    *
+  *
 FROM
-    animals
+  animals
 WHERE
-    name LIKE '%mon%';
+  name LIKE '%mon%';
 
 SELECT
-    name
+  name
 FROM
-    animals
+  animals
 WHERE
-    date_of_birth BETWEEN '2016-01-01'
-    AND '2019-12-31';
+  date_of_birth BETWEEN '2016-01-01'
+  AND '2019-12-31';
 
 SELECT
-    name
+  name
 FROM
-    animals
+  animals
 WHERE
-    neutered IS TRUE
-    AND escape_attempts < 3;
+  neutered IS TRUE
+  AND escape_attempts < 3;
 
 SELECT
-    date_of_birth
+  date_of_birth
 FROM
-    animals
+  animals
 WHERE
-    name IN ('Agumon', 'Pikachu');
+  name IN ('Agumon', 'Pikachu');
 
 SELECT
-    name,
-    escape_attempts
+  name,
+  escape_attempts
 FROM
-    animals
+  animals
 WHERE
-    weight_kg > 10.5;
+  weight_kg > 10.5;
 
 SELECT
-    *
+  *
 FROM
-    animals
+  animals
 WHERE
-    neutered IS TRUE;
+  neutered IS TRUE;
 
 SELECT
-    *
+  *
 FROM
-    animals
+  animals
 WHERE
-    name <> 'Gabumon';
+  name <> 'Gabumon';
 
 SELECT
-    *
+  *
 FROM
-    animals
+  animals
 WHERE
-    weight_kg BETWEEN 10.4
-    and 17.3;
+  weight_kg BETWEEN 10.4
+  and 17.3;
 
 /*TRANSACTIONS:
  /*TRANSACTION 1: Inside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that the species columns went back to the state before the transaction.*/
 BEGIN;
 
 UPDATE
-    animals
+  animals
 SET
-    species = 'unspecified';
+  species = 'unspecified';
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 ROLLBACK;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 /*TRANSACTION 2: 
  Inside a transaction:
@@ -88,54 +88,54 @@ FROM
 BEGIN;
 
 UPDATE
-    animals
+  animals
 SET
-    species = 'digimon'
+  species = 'digimon'
 WHERE
-    name LIKE '%mon%';
+  name LIKE '%mon%';
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 UPDATE
-    animals
+  animals
 SET
-    species = 'pokemon'
+  species = 'pokemon'
 WHERE
-    species IS NULL;
+  species IS NULL;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 COMMIT;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 /*TRANSACTION 3:
  Inside a transaction delete all records in the animals table, then roll back the transaction.After the rollback verify if all records in the animals table still exists.*/
 BEGIN;
 
 DELETE FROM
-    animals;
+  animals;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 ROLLBACK;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 /*TRANSACTION 4:
  Inside a transaction:
@@ -148,52 +148,52 @@ FROM
 BEGIN;
 
 DELETE FROM
-    animals
+  animals
 WHERE
-    date_of_birth > '2022-01-01';
+  date_of_birth > '2022-01-01';
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 SAVEPOINT savepoint1;
 
 UPDATE
-    animals
+  animals
 SET
-    weight_kg = weight_kg * -1;
+  weight_kg = weight_kg * -1;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 ROLLBACK TO savepoint1;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 UPDATE
-    animals
+  animals
 SET
-    weight_kg = weight_kg * -1
+  weight_kg = weight_kg * -1
 WHERE
-    weight_kg < 0;
+  weight_kg < 0;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 COMMIT;
 
 SELECT
-    *
+  *
 FROM
-    animals;
+  animals;
 
 /*Write queries to answer the following questions:
  1. How many animals are there?
@@ -203,46 +203,118 @@ FROM
  5 What is the minimum and maximum weight of each type of animal?
  6. What is the average number of escape attempts per animal type of those born between 1990 and 2000?*/
 SELECT
-    COUNT(*)
+  COUNT(*)
 FROM
-    animals;
+  animals;
 
 SELECT
-    COUNT(*)
+  COUNT(*)
 FROM
-    animals
+  animals
 WHERE
-    escape_attempts = 0;
+  escape_attempts = 0;
 
 SELECT
-    AVG(weight_kg)
+  AVG(weight_kg)
 FROM
-    animals;
+  animals;
 
 SELECT
-    neutered,
-    MAX(escape_attempts)
+  neutered,
+  MAX(escape_attempts)
 FROM
-    animals
+  animals
 GROUP BY
-    neutered;
+  neutered;
 
 SELECT
-    species,
-    MIN(weight_kg),
-    MAX(weight_kg)
+  species,
+  MIN(weight_kg),
+  MAX(weight_kg)
 FROM
-    animals
+  animals
 GROUP BY
-    species;
+  species;
 
 SELECT
-    species,
-    AVG(escape_attempts)
+  species,
+  AVG(escape_attempts)
 FROM
-    animals
+  animals
 WHERE
-    date_of_birth BETWEEN '1990-01-01'
-    AND '2000-12-31'
+  date_of_birth BETWEEN '1990-01-01'
+  AND '2000-12-31'
 GROUP BY
-    species;
+  species;
+
+/*Write queries (using JOIN) to answer the following questions:
+ 1. What animals belong to Melody Pond?
+ 2. List of all animals that are pokemon (their type is Pokemon).
+ 3. List all owners and their animals, remember to include those that don't own any animal.
+ 4. How many animals are there per species?
+ 5. List all Digimon owned by Jennifer Orwell.
+ 6. List all animals owned by Dean Winchester that haven't tried to escape.
+ 7. Who owns the most animals?*/
+SELECT
+  name
+FROM
+  animals
+  JOIN owners ON animals.owner_id = owners.id
+WHERE
+  owners.full_name = 'Melody Pond';
+
+SELECT
+  animals.name
+FROM
+  animals
+  JOIN species ON animals.species_id = species.id
+WHERE
+  species.name = 'Pokemon';
+
+SELECT
+  owners.full_name,
+  animals.name
+FROM
+  owners
+  LEFT JOIN animals ON owners.id = animals.owner_id;
+
+SELECT
+  species.name,
+  COUNT(animals.name)
+FROM
+  animals
+  JOIN species ON animals.species_id = species.id
+GROUP BY
+  species.id;
+
+SELECT
+  animals.name
+FROM
+  animals
+  JOIN owners ON animals.owner_id = owners.id
+  JOIN species ON animals.species_id = species.id
+WHERE
+  species.name = 'Digimon'
+  AND owners.full_name = 'Jennifer Orwell';
+
+SELECT
+  animals.name
+FROM
+  animals
+  JOIN owners ON animals.owner_id = owners.id
+WHERE
+  owners.full_name = 'Dean Winchester'
+  AND animals.escape_attempts = 0;
+
+SELECT
+  owners.full_name,
+  COUNT(animals.name)
+FROM
+  animals
+  JOIN owners ON animals.owner_id = owners.id
+GROUP BY
+  owners.full_name
+ORDER BY
+  COUNT DESC
+LIMIT
+  1;
