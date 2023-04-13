@@ -1,10 +1,3 @@
-<a name="readme-top"></a>
-
-<div align="center">
-
-<h1><b>Vet Clinic Database</b></h1>
-
-</div>
 
 # 📗 Table of Contents
 
@@ -12,75 +5,96 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Run tests](#run-tests)
-- [👥 Authors](#authors)
+  - [Setup](#setup)
+  - [Create database](#create-database)
+- [👥 Author](#author)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
+- [❓ FAQ](#faq)
 - [📝 License](#license)
 
-<!-- PROJECT DESCRIPTION -->
+# 📖 Vet Clinic <a name="about-project"></a>
 
-# 📖 Vet Clinic Database <a name="about-project"></a>
+**Vet Clinic** is a project to create data structure for a vet clinic using a relational database. It implements PostgreSQL and contains all the data about animals. The complete database contains tables with data about:
+    [] animals
+    [] animals' owners
+    [] vets
+    [] visits
 
-**Vet Clinic Database** Relational database data structure for a vet clinic.
 
 ## 🛠 Built With <a name="built-with"></a>
-
- - PostgreSQL
 
 ### Tech Stack <a name="tech-stack"></a>
 
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
   </ul>
 </details>
 
 ### Key Features <a name="key-features"></a>
 
-- **data_structure**
-- **postgresql**
-- **queries**
+- Create a database to store animals' information
+- Insert some data into table, and query it
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-To get a local copy up and running, follow these steps.
-
-### Setup
+### Prerequisites
 
 In order to run this project you need:
 
- PostgreSQL server
- psql
+- [PostgreSQL server](https://www.postgresql.org/download/) installed and running
+- [psql](https://www.postgresql.org/docs/current/app-psql.html) installed
 
-### Usage
+### Setup
 
-To run the project, execute the following command:
+Clone this repository to your desired folder:
 
-  psql
-  CREATE DATABASE vet_clinic
-  psql vet_clinic
+```
+git clone https://github.com/gealsanchez/vetclinicdb.git
+cd vet-clinic
+```
 
-- Use schema.sql to create all tables.
-- Use data.sql to populate tables with sample data.
-- Check queries.sql for examples of queries that can be run on a newly created database.
+### Create database
+
+1. Connect to your PostgreSQL server with `psql`
+```
+> psql
+postgres=#
+```
+
+2. Create the database `vet_clinic`
+```
+postgres=# CREATE DATABASE vet_clinic;
+CREATE DATABASE
+```
+
+3. Connect to your database vet_clinic. Inside your current session do:
+```
+postgres=# \c vet_clinic
+You are now connected to database "vet_clinic" as user "postgres".
+vet_clinic=#
+```
+
+That's it! Congratulations, you have created your database and connected to it. Next, we will add a table.
+
+- Use [schema.sql](./schema.sql) to create all tables.
+- Use [data.sql](./data.sql) to populate tables with sample data.
+- Check [queries.sql](./queries.sql) for examples of queries that can be run on a newly created database.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Database Schema Diagram
 ![Schema Diagram soom](./vetclinicdb.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## 👥 Authors <a name="authors"></a>
 
@@ -89,6 +103,15 @@ To run the project, execute the following command:
 - GitHub: [@githubhandle](https://github.com/gealsanchez)
 - Twitter: [@twitterhandle](https://twitter.com/gealsanchez)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/gerson-sanchez-88309b57/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- Insert new data
+- Update existence data
+- Delete existence data
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -102,16 +125,17 @@ Feel free to check the [issues page](../../issues/).
 
 ## ⭐️ Show your support <a name="support"></a>
 
-Give a ⭐️ if you like this project!
+Give a start if you like this project!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LICENSE -->
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+- I would like to thank the Microverse Team!
+- I would like to thank All my partners!
 
 ## 📝 License <a name="license"></a>
 
 This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
