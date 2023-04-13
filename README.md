@@ -76,6 +76,12 @@ To run the project, execute the following command:
 - Use data.sql to populate tables with sample data.
 - Check queries.sql for examples of queries that can be run on a newly created database.
 
+## Database Schema Diagram
+![Schema Diagram soom](./vetclinicdb.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 ## 👥 Authors <a name="authors"></a>
 
 👤 **Gerson SANCHEZ**
